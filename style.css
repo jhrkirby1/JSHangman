@@ -1,0 +1,75 @@
+
+* {
+    margin: 0;
+    padding: 10;
+    box-sizing: inherit;
+  }
+  
+  html {
+    font-size: 85.5%;
+    box-sizing: border-box;
+    color: rgb(98, 11, 238);
+  }
+
+
+body {
+    font-family: 'Noto Serif', sans-serif;
+    color: rgb(98, 11, 238);
+    background-color: #faf4da;
+    height: 75vh;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .num_turns_left {
+    text-align: left;
+    color: rgb(98, 11, 238);
+}
+  .num_tries  {
+    text-align: left;
+    color: rgb(98, 11, 238);
+}
+
+  .guess_word {
+    text-align: center;
+    
+    color: rgb(104, 108, 238);
+    border: 5px solid red;
+    font-size: xx-large;
+  }
+
+  .status {
+    height: 20vh;
+    text-align: center;
+    padding: 4rem;
+    color: rgb(104, 108, 238);
+    font-size: x-large;
+    font-weight: 300;
+    
+  }
+  .game_input {
+    font-size: x-large;
+    color: rgb(5, 5, 5);
+    height: 10vh;
+    padding: 2rem;
+    text-align: center;
+
+  }
+  .game_stats {
+    color: rgb(5, 5, 5);
+    height: 50vh;
+    padding: 5rem;
+    text-align: left;
+    text-size-adjust: 54;
+    font-size: large;
+
+  }
+
+  .game_options {
+    color: rgb(5, 5, 5);
+    padding: 2rem;
+    text-align: center;
+    font-size: large;
+    line-height: 35px;
+  }
+
