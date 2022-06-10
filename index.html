@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<meta charset="UTF-8" />
+<meta name = "viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+<link rel="shortcut icon" type="image/png" href="/favicon-16x16.png" />
+
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+
+<title>JSHangman Game</title>
+
+<body>
+    <h1> Let's play JSHangman!</h1>
+    <p class = "first">Guess the word before you run out of turns!</p>
+<div class="game_input">
+    <form class="start_form">&rArr;<input type = "submit" value="Guess a letter (a-z)"></form>
+
+    <input type="'text" maxlength="1" class="letter_input">
+</div>
+<div class="game_stats">
+
+    <label id="num_of_turns">Number of turns left:</label>
+    <p class="num_turns_left">10</p>
+    <label id="num_of_tries">Number of tries made:</label>
+    <p class="num_tries">0</p>
+    <label id="gues__word">What is this word?</label>
+    <p class="guess_word">???</p>
+    <p class="status">Let's start!</p>
+</div>
+<div class="game_options">
+ <label id="ask_to_play_again">Game over!  Do you want to play again?</label>   
+    <button class="play_again">Yes</button>
+    
+    <button class="dont_play_again">No</button>
+</div>
+
+
+    <footer>
+      &copy; by Judy Casella @operaticcoder on Twitter
+    </footer>
+
+<script src="hmGame.js"></script>    
+</body>
+</html>
+</!DOCTYPE>
