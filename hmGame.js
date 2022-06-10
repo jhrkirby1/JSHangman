@@ -125,8 +125,10 @@ const guessMatch = function (gWord){
     labelNumTries.textContent = tries;
 
     //is it the initial try?
+   
+
     if(guessCount == 10 && tries == 1){
-        console.trace();
+        //console.trace();
         guessWord = gameWord;
         //get the length of the guess word.
         gameWordLength = guessWord.length;
@@ -173,43 +175,30 @@ const guessMatch = function (gWord){
     
             };
 
-            //This is where I need it to wait for the button click again!!!!
-
-            
-            
-            
-    
-
+            //This is where I need it to wait for the button click again!!!
   
-
-            
 
         } else {
 
-            console.log('Bad guess!  Try again!');
+            console.log('Bad guess!');
 
             //Decrement the count
             guessCount = guessCount-1;
             //console.log(guessCount);
             labelNumTurnsLeft.textContent = guessCount;
 
-            //This is where I need it to wait for the button click again!!!!   
-
-            
+            //This is where I need to check to see if the turns left is 0.  If so, tell you user, they lost.
+            if (guessCount == 0)  {
+            //If the count is 0 the user has to pick if they want to either play again or quit.
+            labelStatus.textContent=`You lost! The word was '${gameWord}'`;
+            //console.log(`You've run out of turns! The word was ${gameWord}`);
+            labelAsk.style.opacity = 100;
+            //endGame();
+            };
         };    
 
-    } else {
-    
-        //If the count is 0 the user has to pick if they want to either play again or quit.
-        labelStatus.textContent=`You lost! The word was '${gameWord}'`;
-        //console.log(`You've run out of turns! The word was ${gameWord}`);
-        labelAsk.style.opacity = 100;
-        //endGame();
-        
-
-        
-        };
-    };
+    } else {  };
+};
 
 
 //start game
@@ -235,6 +224,7 @@ btnYes.addEventListener('click', function(e){
     shownWord = '';
     guessCount = 10;
     tries = 0;
+    labelAsk.style.opacity = 0;
 
 });
 
