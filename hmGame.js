@@ -4,7 +4,7 @@
 
 const libraryWords = {
 
-    wordsArray: ['happy', 'cat', 'dog', 'bear', 'gas'],
+    wordsArray: ['happy', 'cat', 'dog', 'bear', 'gas','tags', 'give'],
 
 };
 
@@ -33,7 +33,7 @@ const labelGuessWord = document.querySelector('.guess_word');
 const inputLetter = document.querySelector('.letter_input');
 const labelStatus = document.querySelector('.status');
 const labelAsk = document.querySelector('.game_options');
-
+const labelLettersPicked = document.querySelector('.letters_guessed');
 //hide the game options section initially
 
 labelAsk.style.opacity = 0;
@@ -104,6 +104,19 @@ const updateShownWord = function(index,letter){
 
 }
 
+const checkForLettersOnly = function(inputVal){
+    var regEx = /^[A-Za-z]+$/;
+    if(regEx.test(inputVal))
+      {
+       return true;
+      }
+    else
+      {
+      //alert("Please enter letters only.");
+      return false;
+      }
+ };
+
 
 
 const guessMatch = function (gWord){
@@ -113,29 +126,32 @@ const guessMatch = function (gWord){
 
 
 
-    let guessLetter = inputLetter.value;
-    //console.log(guessLetter);
+    let guessLetter = inputLetter.value.toLowerCase();
+    //console.log('The GL is '+guessLetter);
+        
+    
     //reset the input box
     inputLetter.value = '';
 
+    labelLettersPicked.textContent += guessLetter+', ';
 
     //increment the number of tries
     tries = tries+1;
-    console.log(`The number of tries is ${tries}`);
+    //console.log(`The number of tries is ${tries}`);
     labelNumTries.textContent = tries;
 
     //is it the initial try?
    
-
+    //If it's the beginning of the game set the interim guessword to the initial game word. Get the length of the game word and then set the shown word to give the user a hint.
     if(guessCount == 10 && tries == 1){
-        //console.trace();
+        
         guessWord = gameWord;
         //get the length of the guess word.
         gameWordLength = guessWord.length;
-        console.log('game word length is '+ gameWordLength);
+        //console.log('game word length is '+ gameWordLength);
         //set the solved word.
         solvedWord =  solvedWord.repeat(gameWordLength).concat();
-        console.log('Solved word is: '+ solvedWord);
+        //console.log('Solved word is: '+ solvedWord);
         shownWord = solvedWord;
         labelStatus.textContent = 'Game started. Good Luck!';
 
@@ -153,12 +169,16 @@ const guessMatch = function (gWord){
         //if the guessWord contains the letter the user entered, decrement the word count by replacing that letter with a '-' character.
      
       
-
+        //check to see if the letter is in the word
         if (guessWord.includes(guessLetter)){
-            //console.trace('start trace here');
+            //If it is tell the user
+            labelStatus.textContent =`Found letter ${guessLetter}! Keep going!`;
             console.log('Found letter');
+            //match it to the index and then update the interim guess word.
             guessWord = matchTrue(guessLetter,guessWord);
-            console.log('The new guess word is '+ guessWord);
+            
+            //console.log('The new guess word is '+ guessWord);
+            inputLetter.focus();
 
 
 
@@ -167,7 +187,7 @@ const guessMatch = function (gWord){
  
 
             if(shownWord==gameWord){
-                //console.log(`You won! The word was ${gameWord}`);
+
 
                 //Tell the user they won and show the game word.
                 labelStatus.textContent=`You won! The word was '${gameWord}'`;
@@ -175,17 +195,18 @@ const guessMatch = function (gWord){
     
             };
 
-            //This is where I need it to wait for the button click again!!!
+
   
 
         } else {
 
-            console.log('Bad guess!');
+            labelStatus.textContent = "Bad guess! Try again!"
+            
 
             //Decrement the count
             guessCount = guessCount-1;
             //console.log(guessCount);
-            labelNumTurnsLeft.textContent = guessCount;
+            labelNumTurnsLeft.textContent = guessCount;inputLetter.focus(); 
 
             //This is where I need to check to see if the turns left is 0.  If so, tell you user, they lost.
             if (guessCount == 0)  {
@@ -206,8 +227,23 @@ const guessMatch = function (gWord){
 
 btnStartGame.addEventListener('click',function(e) {
     e.preventDefault();
- 
+    //validate that the user has entered in only letters
+    
+    const isValidInput = checkForLettersOnly(inputLetter.value);
+    console.log('Checking for letters only is '+isValidInput);
+    
+    try {
+    if (inputLetter.value=="") throw "You didn't enter a letter. Please try again.";
+    if (isValidInput == false) throw "Invalid input. Please enter a letter.";
     guessMatch(guessWord);
+    }
+    catch(e){
+        labelStatus.textContent=e;
+    };
+    
+
+    
+    
 
 
 });
@@ -229,5 +265,5 @@ btnYes.addEventListener('click', function(e){
 });
 
 btnNo.addEventListener('click', function(e){
-    labelStatus.textContent = 'Ok.  Please come back and play again another time!';
+    labelStatus.textContent = 'Please come back and play again another time!';
 });
