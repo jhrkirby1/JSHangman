@@ -4,7 +4,7 @@
 
 const libraryWords = {
 
-    wordsArray: ['happy', 'cat', 'dog', 'bear', 'gas','tags', 'give'],
+    wordsArray: ['happy', 'cat', 'dog', 'bear', 'gas','tags', 'give', 'mississippi', 'glass', 'garbage', 'play', 'baseball', 'fun'],
 
 };
 
@@ -16,6 +16,7 @@ let gameWordLength;
 let solvedWord = '-'
 let tries = 0;
 let shownWord;
+let foundIndex;
 
 
 ///////////////////////
@@ -38,7 +39,7 @@ const labelLettersPicked = document.querySelector('.letters_guessed');
 
 labelAsk.style.opacity = 0;
 
-
+inputLetter.focus();
 
 const pickWord = function (){
 
@@ -71,17 +72,23 @@ console.log(gameWord);
 //     console.log(answer);
 // };
 
-const matchTrue = function(letter, word){
 
-    let foundIndex = word.indexOf(letter);
+
+const matchTrue = function(letter, word){
+    
+
+    
+
+    foundIndex = word.indexOf(letter);
     //console.log(foundIndex);
     let interimGuessWord = word.replace(letter, '-');
     //This is where we want to update the guess word on the web page.
     updateShownWord(foundIndex,letter);
-    //labelGuessWord.textContent = solvedWord;    
-    //console.log(interimGuessWord);
-    return interimGuessWord;
 
+
+
+    return interimGuessWord;
+    
 };
 
 //Defining replacement function to be used in updating the shownWord value.
@@ -95,7 +102,6 @@ String.prototype.replaceAt = function(index, replaceLetter) {
 const updateShownWord = function(index,letter){
     //This is where we want to update the guess word on the web page.
 
-    //console.log('Index is at '+index+' and the letter is'+letter);
 
     shownWord = shownWord.replaceAt(index,letter);
     //console.log('The shown word is '+shownWord);
@@ -124,8 +130,6 @@ const guessMatch = function (gWord){
     if (guessCount > 0){
 
 
-
-
     let guessLetter = inputLetter.value.toLowerCase();
     //console.log('The GL is '+guessLetter);
         
@@ -133,7 +137,7 @@ const guessMatch = function (gWord){
     //reset the input box
     inputLetter.value = '';
 
-    labelLettersPicked.textContent += guessLetter+', ';
+    labelLettersPicked.textContent += guessLetter.toUpperCase()+' , ';
 
     //increment the number of tries
     tries = tries+1;
@@ -168,19 +172,27 @@ const guessMatch = function (gWord){
 
         //if the guessWord contains the letter the user entered, decrement the word count by replacing that letter with a '-' character.
      
-      
+     const keepChecking = function(){ 
         //check to see if the letter is in the word
+
+            //match it to the index and then update the interim guess word.
+            guessWord = matchTrue(guessLetter,guessWord);
+            
+            if (guessWord.includes(guessLetter)){
+                keepChecking();  //recursion!  Woot!
+            }else{
+            console.log('The new guess word is '+ guessWord);
+
+            return guessWord;
+            }
+        }
         if (guessWord.includes(guessLetter)){
             //If it is tell the user
             labelStatus.textContent =`Found letter ${guessLetter}! Keep going!`;
             console.log('Found letter');
-            //match it to the index and then update the interim guess word.
-            guessWord = matchTrue(guessLetter,guessWord);
-            
-            //console.log('The new guess word is '+ guessWord);
+            keepChecking();
+
             inputLetter.focus();
-
-
 
             //decide if the entire word has been guessed.  If they have let the know and then ask them if they want to play again.
             //If the guessWord matches the solved word, tell the user they've won.
@@ -223,7 +235,6 @@ const guessMatch = function (gWord){
 
 
 //start game
-//guessMatch(gameWord);
 
 btnStartGame.addEventListener('click',function(e) {
     e.preventDefault();
@@ -250,6 +261,7 @@ btnStartGame.addEventListener('click',function(e) {
 
 btnYes.addEventListener('click', function(e){
     //resets for a new game
+    labelLettersPicked.textContent = '';
     labelNumTurnsLeft.textContent = 10;
     labelNumTries.textContent = 0;
     labelGuessWord.textContent = '???';
@@ -261,6 +273,7 @@ btnYes.addEventListener('click', function(e){
     guessCount = 10;
     tries = 0;
     labelAsk.style.opacity = 0;
+    inputLetter.focus();
 
 });
 
