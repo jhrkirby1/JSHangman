@@ -21,6 +21,11 @@ body {
     text-align: center;
   }
 
+  .first{
+    color:#5f97b9;
+    padding: 1%;
+    font-size: large;
+  }
   .num_turns_left {
     text-align: left;
     color: rgb(98, 11, 238);
@@ -34,16 +39,19 @@ body {
     text-align: center;
     
     color: rgb(104, 108, 238);
-    border: 5px solid red;
+    border: 5px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(60deg,#b16ec4,#5f97b9);
     font-size: xx-large;
   }
 
   .status {
-    height: 20vh;
+    height: 20%;
     text-align: center;
-    padding: 4rem;
+    padding: 1%;
     color: rgb(104, 108, 238);
-    font-size: 30 pc;
+    font-size: 30%;
     font-size: large;
     font-weight: 300;
     
@@ -58,19 +66,33 @@ body {
   }
   .game_stats {
     color: rgb(5, 5, 5);
-    height: 50vh;
-    padding: 5rem;
+    height: 40%;
+    padding: 0%;
     text-align: left;
     text-size-adjust: 54;
     font-size: large;
 
   }
-
+  .hangman{
+    position: relative;
+    padding: 0%;
+    width: 30%;
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+  }
   .game_options {
     color: rgb(5, 5, 5);
-    padding: 2rem;
+    padding: 1%;
     text-align: center;
-    font-size: large;
-    line-height: 35px;
+    font-size: medium;
+    line-height: 15%;
+  }
+  .game_buttons{
+    padding-top: 2%;
+  }
+  .footer{
+    padding: 5%;
   }
 
+  .hidden {
+    display: none;
+  }

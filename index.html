@@ -17,10 +17,8 @@
 
 <body>
     <h1> Let's play JSHangman!</h1>
-    <p class = "first">Guess the word before you run out of turns!</p>
+    <p class = "first">Guess the word before you run out of turns! If you guess correctly, you save a turn!</p>
 <div class="game_input">
-    
-
     <input type="'text" maxlength="1" class="letter_input">
     <button class="start_form">Guess a letter (a-z)</button>
 </div>
@@ -32,6 +30,7 @@
     <div class="num_tries_div">
     <label id="num_of_tries">Number of tries made:</label>
     <label class="num_tries">0</label>
+
 </div>
     <label id="gues__word">What is this word?</label>
     <p class="guess_word">???</p>
@@ -39,13 +38,17 @@
     <p class="status">Let's start!</p>
 </div>
 <div class="game_options" div id = "game__options">
- <label id="ask_to_play_again">Game over!  Do you want to play again?</label>   <div>
-    <button class="play_again">Yes</button>
-
-    <button class="dont_play_again">No</button>
- </div>
+    <label id="ask_to_play_again">Game over!  Do you want to play again?</label> <p></p>  
+<div class="game_buttons">
+       <button class="play_again">Yes</button>
+   
+       <button class="dont_play_again">No</button>
 </div>
 
+</div>
+<div>
+    <img src="img/hm-10.svg" alt="Playing JSHangman" class="hangman" />
+</div>
 
     <footer>
       &copy; by Judy Casella @operaticcoder on Twitter

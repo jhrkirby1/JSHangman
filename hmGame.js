@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 const libraryWords = {
 
     wordsArray: ['happy', 'cat', 'dog', 'bear', 'gas','tags', 'give', 'mississippi', 'glass', 'garbage', 'play', 'baseball', 'fun'],
@@ -35,21 +34,34 @@ const inputLetter = document.querySelector('.letter_input');
 const labelStatus = document.querySelector('.status');
 const labelAsk = document.querySelector('.game_options');
 const labelLettersPicked = document.querySelector('.letters_guessed');
+const gameImage = document.querySelector('.hangman'); 
+
 //hide the game options section initially
 
-labelAsk.style.opacity = 0;
+const init = function(){
+    gameImage.classList.add('hidden');
+    labelAsk.style.opacity = 0;
+    inputLetter.focus();
+    shownWord = '';
+    guessCount = 10;
+    labelNumTurnsLeft.textContent = 10;
+    tries = 0;
+    solvedWord = '-';
+    labelGuessWord.textContent = '???';
+    labelNumTries.textContent = 0;
+    labelLettersPicked.textContent = 'Guessed letters: ';
+    labelStatus.textContent = 'Enter a letter and press the button. Good Luck!';
+};
 
-inputLetter.focus();
+init();
+
 
 const pickWord = function (){
 
     //picks a random value from the length of the array
     randIndexVal = Math.floor(Math.trunc(Math.random()*libraryWords.wordsArray.length));
-    //console.log(randIndexVal);
-
    
     return libraryWords.wordsArray[randIndexVal];
-
 
 };
 
@@ -57,35 +69,14 @@ const pickWord = function (){
 gameWord = pickWord();
 console.log(gameWord);
 
-//end game function
-
-// const endGame = function(){
-//     let answer = prompt('Do you want to play again? Y/N');
-//     if (answer == 'y'){
-//         guessCount = 10;
-//         gameWord = pickWord();
-//         guessMatch(gameWord);
-//     }else{
-//         console.log('Thank you for playing!')
-//     };
-
-//     console.log(answer);
-// };
-
-
 
 const matchTrue = function(letter, word){
-    
-
-    
-
+      
     foundIndex = word.indexOf(letter);
     //console.log(foundIndex);
     let interimGuessWord = word.replace(letter, '-');
     //This is where we want to update the guess word on the web page.
     updateShownWord(foundIndex,letter);
-
-
 
     return interimGuessWord;
     
@@ -101,11 +92,7 @@ String.prototype.replaceAt = function(index, replaceLetter) {
 
 const updateShownWord = function(index,letter){
     //This is where we want to update the guess word on the web page.
-
-
     shownWord = shownWord.replaceAt(index,letter);
-    //console.log('The shown word is '+shownWord);
-    
     labelGuessWord.textContent = shownWord;
 
 }
@@ -118,7 +105,6 @@ const checkForLettersOnly = function(inputVal){
       }
     else
       {
-      //alert("Please enter letters only.");
       return false;
       }
  };
@@ -130,9 +116,7 @@ const guessMatch = function (gWord){
     if (guessCount > 0){
 
 
-    let guessLetter = inputLetter.value.toLowerCase();
-    //console.log('The GL is '+guessLetter);
-        
+    let guessLetter = inputLetter.value.toLowerCase();      
     
     //reset the input box
     inputLetter.value = '';
@@ -141,7 +125,6 @@ const guessMatch = function (gWord){
 
     //increment the number of tries
     tries = tries+1;
-    //console.log(`The number of tries is ${tries}`);
     labelNumTries.textContent = tries;
 
     //is it the initial try?
@@ -152,24 +135,19 @@ const guessMatch = function (gWord){
         guessWord = gameWord;
         //get the length of the guess word.
         gameWordLength = guessWord.length;
-        //console.log('game word length is '+ gameWordLength);
+
         //set the solved word.
         solvedWord =  solvedWord.repeat(gameWordLength).concat();
-        //console.log('Solved word is: '+ solvedWord);
+
         shownWord = solvedWord;
         labelStatus.textContent = 'Game started. Good Luck!';
 
     }else{
 
     guessWord = gWord;
+
     };
-    //console.log(guessWord);
-    //console.log(guessLetter);
-
     
-
-
-
         //if the guessWord contains the letter the user entered, decrement the word count by replacing that letter with a '-' character.
      
      const keepChecking = function(){ 
@@ -179,11 +157,15 @@ const guessMatch = function (gWord){
             guessWord = matchTrue(guessLetter,guessWord);
             
             if (guessWord.includes(guessLetter)){
+
                 keepChecking();  //recursion!  Woot!
+
             }else{
+
             console.log('The new guess word is '+ guessWord);
 
             return guessWord;
+
             }
         }
         if (guessWord.includes(guessLetter)){
@@ -202,31 +184,41 @@ const guessMatch = function (gWord){
 
 
                 //Tell the user they won and show the game word.
+
                 labelStatus.textContent=`You won! The word was '${gameWord}'`;
                 labelAsk.style.opacity = 100;
     
             };
 
 
-  
-
         } else {
 
             labelStatus.textContent = "Bad guess! Try again!"
             
+            //update the image to show the next one in the series.  If it's the first bad guess, unhide the image.
+            if (guessCount==10) {
+                
+                gameImage.classList.remove('hidden');
+                gameImage.src = `img/hm-${guessCount}.svg`;
+
+            }else{
+
+                gameImage.src = `img/hm-${guessCount}.svg`;
+
+            }
 
             //Decrement the count
             guessCount = guessCount-1;
-            //console.log(guessCount);
+
             labelNumTurnsLeft.textContent = guessCount;inputLetter.focus(); 
 
             //This is where I need to check to see if the turns left is 0.  If so, tell you user, they lost.
             if (guessCount == 0)  {
             //If the count is 0 the user has to pick if they want to either play again or quit.
             labelStatus.textContent=`You lost! The word was '${gameWord}'`;
-            //console.log(`You've run out of turns! The word was ${gameWord}`);
+
             labelAsk.style.opacity = 100;
-            //endGame();
+
             };
         };    
 
@@ -251,29 +243,25 @@ btnStartGame.addEventListener('click',function(e) {
     catch(e){
         labelStatus.textContent=e;
     };
-    
-
-    
-    
-
 
 });
 
 btnYes.addEventListener('click', function(e){
     //resets for a new game
-    labelLettersPicked.textContent = '';
-    labelNumTurnsLeft.textContent = 10;
-    labelNumTries.textContent = 0;
-    labelGuessWord.textContent = '???';
-    labelStatus.textContent = 'Enter a letter and press the button. Good Luck!';
+    //labelLettersPicked.textContent = '';
+    //labelNumTurnsLeft.textContent = 10;
+    //labelNumTries.textContent = 0;
+    //labelGuessWord.textContent = '???';
+    //labelStatus.textContent = 'Enter a letter and press the button. Good Luck!';
+    init();
     gameWord = pickWord();
     guessWord =  gameWord;
-    solvedWord = '-';
-    shownWord = '';
-    guessCount = 10;
-    tries = 0;
-    labelAsk.style.opacity = 0;
-    inputLetter.focus();
+    //solvedWord = '-';
+    //shownWord = '';
+    //guessCount = 10;
+    //tries = 0;
+    //labelAsk.style.opacity = 0;
+    //inputLetter.focus();
 
 });
 
