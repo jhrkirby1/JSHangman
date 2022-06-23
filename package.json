@@ -1,0 +1,23 @@
+{
+  "name": "jshangmangame",
+  "version": "1.0.0",
+  "description": "A fun traditional game written in JavaScript",
+  "default": "hmGame.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhrkirby1/JSHangman.git"
+  },
+  "keywords": [
+    "JS"
+  ],
+  "author": "Judy Casella",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhrkirby1/JSHangman/issues"
+  },
+  "homepage": "https://github.com/jhrkirby1/JSHangman#readme"
+}
