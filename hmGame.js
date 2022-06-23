@@ -3,7 +3,7 @@
 
 const libraryWords = {
 
-    wordsArray: ['happy', 'cat', 'dog', 'bear', 'gas','tags', 'give', 'mississippi', 'glass', 'garbage', 'play', 'baseball', 'fun'],
+    wordsArray: ['happy', 'cat', 'dog', 'bear', 'gas','tags', 'give', 'mississippi', 'glass', 'garbage', 'play', 'baseball', 'fun', 'battle', 'fun'],
 
 };
 
@@ -67,13 +67,13 @@ const pickWord = function (){
 
 //picks the random word from the library.
 gameWord = pickWord();
-console.log(gameWord);
+
 
 
 const matchTrue = function(letter, word){
       
     foundIndex = word.indexOf(letter);
-    //console.log(foundIndex);
+
     let interimGuessWord = word.replace(letter, '-');
     //This is where we want to update the guess word on the web page.
     updateShownWord(foundIndex,letter);
@@ -162,7 +162,6 @@ const guessMatch = function (gWord){
 
             }else{
 
-            console.log('The new guess word is '+ guessWord);
 
             return guessWord;
 
@@ -171,7 +170,7 @@ const guessMatch = function (gWord){
         if (guessWord.includes(guessLetter)){
             //If it is tell the user
             labelStatus.textContent =`Found letter ${guessLetter}! Keep going!`;
-            console.log('Found letter');
+            
             keepChecking();
 
             inputLetter.focus();
@@ -233,7 +232,6 @@ btnStartGame.addEventListener('click',function(e) {
     //validate that the user has entered in only letters
     
     const isValidInput = checkForLettersOnly(inputLetter.value);
-    console.log('Checking for letters only is '+isValidInput);
     
     try {
     if (inputLetter.value=="") throw "You didn't enter a letter. Please try again.";
@@ -247,21 +245,11 @@ btnStartGame.addEventListener('click',function(e) {
 });
 
 btnYes.addEventListener('click', function(e){
-    //resets for a new game
-    //labelLettersPicked.textContent = '';
-    //labelNumTurnsLeft.textContent = 10;
-    //labelNumTries.textContent = 0;
-    //labelGuessWord.textContent = '???';
-    //labelStatus.textContent = 'Enter a letter and press the button. Good Luck!';
+
     init();
     gameWord = pickWord();
     guessWord =  gameWord;
-    //solvedWord = '-';
-    //shownWord = '';
-    //guessCount = 10;
-    //tries = 0;
-    //labelAsk.style.opacity = 0;
-    //inputLetter.focus();
+
 
 });
 
