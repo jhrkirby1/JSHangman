@@ -198,11 +198,11 @@ const guessMatch = function (gWord){
             if (guessCount==10) {
                 
                 gameImage.classList.remove('hidden');
-                gameImage.src = `img/hm-${guessCount}.svg`;
+                gameImage.src = `hm-${guessCount}.svg`;
 
             }else{
 
-                gameImage.src = `img/hm-${guessCount}.svg`;
+                gameImage.src = `hm-${guessCount}.svg`;
 
             }
 
