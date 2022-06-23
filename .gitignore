@@ -3,3 +3,4 @@ dist
 .cache
 .DS_Store
 workspace.code-workspace
+.parcel-cache
