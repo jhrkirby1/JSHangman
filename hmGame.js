@@ -36,6 +36,9 @@ const labelAsk = document.querySelector('.game_options');
 const labelLettersPicked = document.querySelector('.letters_guessed');
 const gameImage = document.querySelector('.hangman'); 
 
+//require the images
+//image.src = require()
+
 //hide the game options section initially
 
 const init = function(){
@@ -198,11 +201,11 @@ const guessMatch = function (gWord){
             if (guessCount==10) {
                 
                 gameImage.classList.remove('hidden');
-                gameImage.src = `hm-${guessCount}.svg`;
+                gameImage.src = `img/hm-${guessCount}.png`;
 
             }else{
 
-                gameImage.src = `hm-${guessCount}.svg`;
+                gameImage.src = `./img/hm-${guessCount}.png`;
 
             }
 

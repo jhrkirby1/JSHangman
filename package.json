@@ -5,7 +5,7 @@
   "default": "hmGame.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir ./dist "
+    "build": "parcel build index.html assets/** --dist-dir ./dist "
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/jhrkirby1/JSHangman#readme",
   "devDependencies": {
+    "i": "^0.3.7",
     "parcel": "^2.6.2"
   }
 }
