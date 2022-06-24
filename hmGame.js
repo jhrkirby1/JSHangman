@@ -1,4 +1,46 @@
 'use strict';
+//Parcel requires for me to import all of the images individually.
+const imageUrl10 = new URL(
+    './img/hm-10.png',
+    import.meta.url
+  ).href;
+  const imageUrl9 = new URL(
+    './img/hm-9.png',
+    import.meta.url
+  ).href;
+  const imageUrl8 = new URL(
+    './img/hm-8.png',
+    import.meta.url
+  ).href;
+  const imageUrl7 = new URL(
+    './img/hm-7.png',
+    import.meta.url
+  ).href;
+  const imageUrl6 = new URL(
+    './img/hm-6.png',
+    import.meta.url
+  ).href;
+  const imageUrl5 = new URL(
+    './img/hm-5.png',
+    import.meta.url
+  ).href;
+  const imageUrl4 = new URL(
+    './img/hm-4.png',
+    import.meta.url
+  ).href;
+  const imageUrl3 = new URL(
+    './img/hm-3.png',
+    import.meta.url
+  ).href;
+  const imageUrl2 = new URL(
+    './img/hm-2.png',
+    import.meta.url
+  ).href;
+  const imageUrl1 = new URL(
+    './img/hm-1.png',
+    import.meta.url
+  ).href;
+
 
 
 const libraryWords = {
@@ -198,15 +240,51 @@ const guessMatch = function (gWord){
             labelStatus.textContent = "Bad guess! Try again!"
             
             //update the image to show the next one in the series.  If it's the first bad guess, unhide the image.
-            if (guessCount==10) {
+            //for some reason parcel doesn't like doing dynamic html page updates for images unless I use a switch statement. :(
+           /*  if (guessCount==10) {
                 
                 gameImage.classList.remove('hidden');
-                gameImage.src = `img/hm-${guessCount}.png`;
+                gameImage.src = imgUrlArray[guessCount];
+                console.log(imgUrlArray[guessCount]);
+
 
             }else{
 
-                gameImage.src = `./img/hm-${guessCount}.png`;
+                gameImage.src = `./img/${imgUrlArray[guessCount]}`;
+                console.log(`./img/${imgUrlArray[guessCount]}`);
 
+            } */
+            switch(guessCount){
+                case 10:
+                gameImage.classList.remove('hidden');
+                gameImage.src = imageUrl10;
+                break;
+                case 9:
+                gameImage.src = imageUrl9;  
+                break;
+                case 8:
+                gameImage.src = imageUrl8;
+                break;
+                case 7:
+                gameImage.src = imageUrl7;
+                break;
+                case 6:
+                gameImage.src = imageUrl6;
+                break;
+                case 5:
+                gameImage.src = imageUrl5;
+                break;
+                case 4:
+                gameImage.src = imageUrl4;
+                break;
+                case 3:
+                gameImage.src = imageUrl3;
+                break;
+                case 2:
+                gameImage.src = imageUrl2;
+                break;
+                case 1:
+                gameImage.src = imageUrl1;          
             }
 
             //Decrement the count

@@ -2,7 +2,7 @@
   "name": "jshangmangame",
   "version": "1.0.0",
   "description": "A fun traditional game written in JavaScript",
-  "default": "hmGame.js",
+  "default": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html assets/** --dist-dir ./dist "
